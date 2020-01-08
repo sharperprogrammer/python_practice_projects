@@ -93,26 +93,27 @@ def increment_card_count(my_string):
     else:
         face_counts[card_name] = 1
     
-    
     if suit_counts.get(suit):
         suit_counts[suit] = suit_counts.get(suit) + 1
     else:
         suit_counts[suit] = 1
 
-for x in range(1,100000):
+def check_for_pocket_pair():
+    global pocket_pairs
+    global no_pocket_pairs
+    # if both cards are the same face, there will be only 1 key:value pair in the dictionary - face_counts
+    if 1 == len(face_counts):
+        pocket_pairs += 1
+    else:
+        no_pocket_pairs += 1
+
+for x in range(1,10001):
 
     # make a copy of the deck of cards for each round of the game
     playing_cards = card_list[:]
 
-    # print(playing_cards[0])
-    # print(playing_cards[51])
-
-    # checking if card is a club
-    # print(playing_cards[51].find('Clubs') != -1)
-
     hand = []
     table = []
-
     deal_hand()
     deal_table()
     print('\n\n')
@@ -123,16 +124,13 @@ for x in range(1,100000):
     for card in hand:
         increment_card_count(card)
 
-    print("Face counts:")
-    print(face_counts)
+    # print("Face counts:")
+    # print(face_counts)
 
-    print("Suit counts:")
-    print(suit_counts)
+    # print("Suit counts:")
+    # print(suit_counts)
 
-    if 1 == len(face_counts):
-        pocket_pairs += 1
-    else:
-        no_pocket_pairs += 1
+    check_for_pocket_pair()
 
     print('\n\n')
 
